@@ -12,12 +12,12 @@ class RoleController extends Controller
 {
      public function index(){
         $roles = Role::get();
-        return view('role-permission.roles.index', compact(['roles']));
+        return view('admin.role-permission.roles.index', compact(['roles']));
     }
 
 
     public function create(){
-         return view('role-permission.roles.create');
+         return view('admin.role-permission.roles.create');
     }
 
 
@@ -34,7 +34,7 @@ class RoleController extends Controller
 
 
     public function edit(Role $role){
-        return view("role-permission.roles.edit", compact(['role']));
+        return view("admin.role-permission.roles.edit", compact(['role']));
     }
 
 

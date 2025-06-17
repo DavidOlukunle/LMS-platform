@@ -12,12 +12,12 @@ class UserController extends Controller
     public function index(){
         $users = User::get();
 
-        return view('role-permission.user.index', compact(['users']));
+        return view('admin.role-permission.user.index', compact(['users']));
     }
 
     public function create(){
         $roles = Role::pluck('name', 'name')->all();
-        return view('role-permission.user.create', compact(['roles']));
+        return view('admin.role-permission.user.create', compact(['roles']));
     }
 
     public function store(Request $request){
@@ -34,7 +34,7 @@ class UserController extends Controller
             'email' =>$request->email
         ]);
         $user->syncRoles($request->roles);
-        return redirect('users')->with('status', 'User created and role assigned successfully');
+        return redirect('admin.users')->with('status', 'User created and role assigned successfully');
     }
 
     public function edit(User $user){

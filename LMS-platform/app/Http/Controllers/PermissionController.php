@@ -9,12 +9,12 @@ class PermissionController extends Controller
 {
     public function index(){
         $permissions = Permission::get();
-        return view('role-permission.permission.index', compact(['permissions']));
+        return view('admin.role-permission.permission.index', compact(['permissions']));
     }
 
 
     public function create(){
-         return view('role-permission.permission.create');
+         return view('admin.role-permission.permission.create');
     }
 
 
@@ -31,7 +31,7 @@ class PermissionController extends Controller
 
 
     public function edit(Permission $permission){
-        return view("role-permission.permission.edit", compact(['permission']));
+        return view("admin.role-permission.permission.edit", compact(['permission']));
     }
 
 

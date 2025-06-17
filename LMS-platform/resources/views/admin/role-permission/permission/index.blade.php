@@ -7,7 +7,7 @@
     
 </head>
 
-@include('role-permission.nav-link')
+@include('admin.role-permission.nav-link')
 
 @if(session('status'))
   <div class="max-w-md mx-auto mt-4">
