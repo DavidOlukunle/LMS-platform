@@ -42,7 +42,7 @@
          <td>{{$role->name}}</td>
          <td><td class="px-6 py-4 flex space-x-2">
          <a href="{{ url('roles/'.$role->id.'/give-permissions') }}"
-               class="bg-yellow-500 hover:bg-yellow-600 text-white px-3 py-1 rounded-md text-sm">Add/Edit Role permission</a>
+               class="bg-green-500 hover:bg-green-600 text-white px-3 py-1 rounded-md text-sm">Add/Edit Role permission</a>
 
             <a href="{{ url('roles/'.$role->id.'/edit') }}"
                class="bg-yellow-500 hover:bg-yellow-600 text-white px-3 py-1 rounded-md text-sm">Edit</a>

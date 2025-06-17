@@ -48,7 +48,7 @@
 
         @if(!empty($user->getRoleNames()))
           @foreach($user->getRoleNames() as $rolename)
-          <div class ="bg-yellow-500 hover:bg-yellow-600 text-white px-3 py-1 rounded-md text-sm">{{$rolename}}</div>
+          <div class ="">{{$rolename}}</div>
           @endforeach
           @endif
         
