@@ -13,7 +13,7 @@
 <div class = 'card'>
 <div class= 'card-header'>
 <h4>Roles
-<a href = "{{url('users')}}" class = "btn btn-primary float-end">Back</a>
+<a href = "{{url('admin/users')}}" class = "btn btn-primary float-end">Back</a>
 </h4>
 </div>
 
@@ -22,7 +22,7 @@
 <div class="max-w-md mx-auto mt-10 bg-white p-6 rounded-lg shadow-md">
   <h2 class="text-xl font-bold mb-4 text-gray-800">Edit User</h2>
 
-  <form action="{{ url('users/'. $user->id) }}" method="POST">
+  <form action="{{ url('admin/users/'. $user->id) }}" method="POST">
   
     @csrf
     @method("PUT")

@@ -13,7 +13,7 @@
 <div class = 'card'>
 <div class= 'card-header'>
 <h4>Permissions
-<a href = "{{url('permissions')}}" class = "btn btn-primary float-end">Back</a>
+<a href = "{{url('admin/permissions')}}" class = "btn btn-primary float-end">Back</a>
 </h4>
 </div>
 
@@ -22,7 +22,7 @@
 <div class="max-w-md mx-auto mt-10 bg-white p-6 rounded-lg shadow-md">
   <h2 class="text-xl font-bold mb-4 text-gray-800">Edit Permission</h2>
 
-  <form action="{{ url('permissions/'.$permission->id) }}" method="POST">
+  <form action="{{ url('admin/permissions/'.$permission->id) }}" method="POST">
   
     @csrf
     @method("PUT")

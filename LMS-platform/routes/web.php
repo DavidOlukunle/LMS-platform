@@ -30,10 +30,21 @@ Route::middleware('auth')->group(function () {
 //middleware for admin
  Route::middleware(['auth', 'role:Admin'])->prefix('admin')->name('admin.')->group(function(){
 
-Route::get('dashboard', [AdminController::class, 'index']);   
+Route::get('dashboard', [AdminController::class, 'index']); 
+Route::get("instructors", [AdminController::class, 'instructor']);  
 Route::resource('roles', RoleController::class);
+Route::get('roles/{roleId}/give-permissions', [RoleController::class, 'addPermissionToRole']);
+Route::put('roles/{roleId}/give-permissions', [RoleController::class, 'givePermissionToRole']);
+Route::get('roles/{roleId}/delete', [RoleController::class, 'destroy']);
+
 Route::resource('permissions', PermissionController::class);
+Route::get("permissions/{permissionId}/delete", [PermissionController::class, 'destroy']);
+
+
 Route::resource('users', UserController::class);
+Route::get("users/{userId}/delete", [UserController::class, 'destroy']);
+
+
 
  });
 
@@ -42,6 +53,8 @@ Route::resource('users', UserController::class);
 Route::middleware(['auth', 'role:instructor'])->prefix('instructor')->name('instructor.')->group(function(){
     Route::get('dashboard', [InstructorController::class, 'index']);
     Route::resource('courses', InstructorController::class);
+    Route::get('register', [InstructorController::class, 'viewRegisterPage']);
+    Route::post('register', [InstructorController::class, 'storeRegistration']);
 });
 
 

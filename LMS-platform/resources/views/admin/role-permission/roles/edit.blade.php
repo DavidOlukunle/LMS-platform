@@ -22,7 +22,7 @@
 <div class="max-w-md mx-auto mt-10 bg-white p-6 rounded-lg shadow-md">
   <h2 class="text-xl font-bold mb-4 text-gray-800">Edit Role</h2>
 
-  <form action="{{ url('roles/'.$role->id) }}" method="POST">
+  <form action="{{ url('admin/roles/'.$role->id) }}" method="POST">
   
     @csrf
     @method("PUT")

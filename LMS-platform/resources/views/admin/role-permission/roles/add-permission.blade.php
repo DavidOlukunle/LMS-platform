@@ -22,14 +22,14 @@
       <!-- Header -->
       <div class="flex justify-between items-center px-6 py-4 border-b border-gray-200 bg-gray-50">
         <h4 class="text-xl font-semibold text-gray-800">Role: {{ $role->name }}</h4>
-        <a href="{{ url('roles') }}" class="bg-blue-600 text-white px-4 py-2 rounded-md text-sm hover:bg-blue-700 transition">Back</a>
+        <a href="{{ url('admin/roles') }}" class="bg-blue-600 text-white px-4 py-2 rounded-md text-sm hover:bg-blue-700 transition">Back</a>
       </div>
 
       <!-- Form Section -->
       <div class="p-6">
         <h2 class="text-lg font-semibold mb-4 text-gray-700">Edit Role Permissions</h2>
 
-        <form action="{{ url('roles/'.$role->id.'/give-permissions') }}" method="POST">
+        <form action="{{ url('admin/roles/'.$role->id.'/give-permissions') }}" method="POST">
           @csrf
           @method("PUT")
 

@@ -34,13 +34,13 @@ class UserController extends Controller
             'email' =>$request->email
         ]);
         $user->syncRoles($request->roles);
-        return redirect('admin.users')->with('status', 'User created and role assigned successfully');
+        return redirect('admin/users')->with('status', 'User created and role assigned successfully');
     }
 
     public function edit(User $user){
        $roles = Role::pluck('name', 'name')->all();
        $userRoles = $user->roles->pluck('name', 'name')->all();
-        return view('role-permission.user.edit', [
+        return view('admin.role-permission.user.edit', [
             'user'=>$user,
             'roles'=>$roles,
             'userRoles' => $userRoles
@@ -68,13 +68,13 @@ class UserController extends Controller
         $user->update($data);
         $user->syncRoles($request->roles);
 
-        return redirect('users')->with('status', "user updated");
+        return redirect('admin/users')->with('status', "user updated");
     }
 
     public function destroy($userId){
         $user = User::findorfail($userId);
         $user->delete();
-           return redirect('users')->with('status', "user deleted");
+           return redirect('admin/users')->with('status', "user deleted");
     }
 }
 

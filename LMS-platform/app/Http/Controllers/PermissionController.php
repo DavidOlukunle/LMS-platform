@@ -26,7 +26,7 @@ class PermissionController extends Controller
         permission::create([
             'name' => $request->name
         ]);
-        return redirect('permissions')->with('status', 'permission created successfully');
+        return redirect('admin/permissions')->with('status', 'permission created successfully');
     }
 
 
@@ -42,13 +42,13 @@ class PermissionController extends Controller
          $permission->update([
             'name' => $request->name
         ]);
-        return redirect('permissions')->with('status', 'permission updated successfully');
+        return redirect('admin/permissions')->with('status', 'permission updated successfully');
     }
     
 
     public function destroy($permissionId){
       $permission =  Permission::find($permissionId);
       $permission->delete();
-      return redirect("permissions")->with('status', 'Permission deleted successfully');
+      return redirect("admin/permissions")->with('status', 'Permission deleted successfully');
     }
 }
