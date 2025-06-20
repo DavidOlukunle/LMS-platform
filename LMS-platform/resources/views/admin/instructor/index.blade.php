@@ -30,37 +30,39 @@
           @foreach ($instructors as $instructor)
             
           <tr class="border-t">
-            <td class="px-4 py-2">{{ $instructor->name }}</td>
+             <td class="px-4 py-2 text-blue-600 font-bold"> <a href = "{{ url('/admin/instructor/'.$instructor->id. '/view-instructor') }}"> {{ $instructor->name }} </a> </td>
             <td class="px-4 py-2">{{ $instructor->email }}</td>
-            {{-- <td class="px-4 py-2">{{ $instructor->department ?? 'N/A' }}</td> --}}
+             @endforeach
+
+             @foreach($instructorDetails as $details)
+            <td class="px-4 py-2">{{ $details->department ?? 'N/A' }}</td>
             <td class="px-4 py-2">
-              @if ($instructor->status === 'approved')
+              @if ($details->status === 'approved')
                 <span class="text-green-600 font-semibold">Approved</span>
-              @elseif ($instructor->status === 'pending')
+              @elseif ($details->status === 'pending')
                 <span class="text-yellow-600 font-semibold">Pending</span>
               @else
                 <span class="text-red-600 font-semibold">Suspended</span>
               @endif
             </td>
-            <td class="px-4 py-2 space-x-2">
-              <a href="{{ url('admin/instructors/' . $instructor->id . '/edit') }}"
-                 class="text-blue-600 hover:underline text-sm">Edit</a>
-              <form action="{{ url('admin/instructors/' . $instructor->id) }}" method="POST" class="inline">
-                @csrf
-                @method('DELETE')
-                <button type="submit" class="text-red-600 hover:underline text-sm"
-                        onclick="return confirm('Are you sure?')">Delete</button>
-              </form>
-              @if ($instructor->status === 'pending')
-              <form action="{{ url('admin/instructors/' . $instructor->id . '/approve') }}" method="POST" class="inline">
-                @csrf
-                <button type="submit" class="text-green-600 hover:underline text-sm">Approve</button>
-              </form>
-              @endif
-            </td>
+
+            @endforeach
+
+<td class="px-4 py-2">
+    <form action="{{ url('admin/instructor/'. $instructor->id .'/updateStatus') }}" method="POST">
+        @csrf
+        @method('PATCH')
+        <select name="status" onchange="this.form.submit()"
+            class="border border-gray-300 rounded px-3 py-1 text-sm text-gray-700 focus:outline-none focus:ring focus:border-blue-500">
+            <option value="accepted" {{ $instructor->status === 'accepted' ? 'selected' : '' }}>Accepted</option>
+            <option value="suspended" {{ $instructor->status === 'suspended' ? 'selected' : '' }}>Suspended</option>
+        </select>
+    </form>
+</td>
+
           </tr>
          
-          @endforeach
+          
         </tbody>
       </table>
 

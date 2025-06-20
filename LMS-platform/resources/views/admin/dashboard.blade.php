@@ -6,17 +6,17 @@
     <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
         <div class="bg-white p-6 rounded-lg shadow">
             <h3 class="text-sm font-semibold text-gray-500">Total Courses</h3>
-            <p class="text-2xl font-bold text-blue-600 mt-2">12</p>
+            <p class="text-2xl font-bold text-blue-600 mt-2">{{$course}}</p>
         </div>
 
         <div class="bg-white p-6 rounded-lg shadow">
             <h3 class="text-sm font-semibold text-gray-500">Total Instructors</h3>
-            <p class="text-2xl font-bold text-green-600 mt-2">5</p>
+            <p class="text-2xl font-bold text-green-600 mt-2">{{$instructors}}</p>
         </div>
 
         <div class="bg-white p-6 rounded-lg shadow">
             <h3 class="text-sm font-semibold text-gray-500">Total Students</h3>
-            <p class="text-2xl font-bold text-purple-600 mt-2">148</p>
+            <p class="text-2xl font-bold text-purple-600 mt-2">{{$users}}</p>
         </div>
     </div>
 
