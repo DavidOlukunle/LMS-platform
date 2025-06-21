@@ -49,11 +49,39 @@
 
     <h3 class="text-xl font-semibold mb-4">Your Courses</h3>
     <ul class="list-disc list-inside text-gray-700 space-y-2">
+      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
         @forelse($courses as $course)
-            <li>{{ $course->title }}</li>
+            <div class="bg-white shadow rounded-lg p-4 flex flex-col items-center text-center">
+                <!-- Thumbnail -->
+                <div class="w-full h-40 bg-gray-200 overflow-hidden rounded mb-4">
+                    <img src="{{ $course->image ? asset('storage/' . $course->image) : 'https://via.placeholder.com/300x200' }}" 
+                         alt="{{ $course->title }}" 
+                         class="object-cover w-full h-full">
+                </div>
+
+                <!-- Title -->
+                <h3 class="text-lg font-semibold text-gray-800 mb-1">{{ $course->title }}</h3>
+
+                <!-- Status -->
+                <p class="text-sm text-blue-600 font-medium capitalize mb-1">
+                    Status: {{ $course->status }}
+                </p>
+
+                <!-- Description -->
+                <p class="text-sm text-gray-600 mb-4">
+                    {{ Str::limit($course->description, 80) }}
+                </p>
+
+                <!-- View Button -->
+                <a href="{{ url('instructor/courses/'. $course->id) }}" 
+                   class="text-sm bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">
+                    View Details
+                </a>
+            </div>
         @empty
-            <p class="text-gray-500">No courses yet.</p>
+            <p class="text-gray-600">You haven't created any courses yet.</p>
         @endforelse
+      </div>
     </ul>
 
     <form method="POST" action="{{ route('logout') }}" class="mt-10">

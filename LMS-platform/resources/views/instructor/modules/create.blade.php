@@ -4,10 +4,10 @@
 <div class="max-w-2xl mx-auto bg-white p-6 shadow-md rounded-lg">
     <div class="flex justify-between items-center mb-4">
         <h2 class="text-xl font-bold text-gray-800">Create New Module</h2>
-        {{-- <a href="{{ route('instructor.courses.modules.index', $course) }}" class="text-sm text-blue-600 hover:underline">← Back</a> --}}
+        <a href="{{ url('instructor/modules' ) }}" class="text-sm text-blue-600 hover:underline">← Back</a>
     </div>
 
-    {{-- <form action="{{ route('instructor.courses.modules.store', $course) }}" method="POST"> --}}
+     <form action="{{ url('instructor/modules/'.$course->slug .'/store') }}" method="POST"> 
         @csrf
 
         <div class="mb-4">
@@ -16,6 +16,13 @@
             @error('title')
                 <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
             @enderror
+        </div>
+
+        <div class="mb-4">
+            <label for="description" class="block text-sm font-medium text-gray-700">Description</label>
+            <textarea name="description" id="description" rows="4"
+                class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2 focus:ring focus:ring-indigo-200"
+                required>{{ old('description') }}</textarea>
         </div>
 
         <div class="mt-6">

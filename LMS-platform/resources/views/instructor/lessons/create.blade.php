@@ -7,7 +7,7 @@
         {{-- <a href="{{ route('instructor.courses.modules.lessons.index', [$course, $module]) }}" class="text-sm text-blue-600 hover:underline">← Back</a>
     </div> --}}
 
-    {{-- <form action="{{ route('instructor.courses.modules.lessons.store', [$course, $module]) }}" method="POST" enctype="multipart/form-data"> --}}
+    <form action="{{ url('instructor/lessons/'. $module->id. '/store') }}" method="POST" enctype="multipart/form-data">
         
         <form>
         @csrf
@@ -17,22 +17,19 @@
             <input type="text" name="title" class="w-full border px-4 py-2 rounded focus:outline-none focus:ring" required>
         </div>
 
-        <div class="mb-4">
-            <label class="block text-gray-700 font-semibold mb-1">Lesson Type</label>
-            <select name="type" class="w-full border px-4 py-2 rounded">
-                <option value="video">Video</option>
-                <option value="pdf">PDF</option>
-            </select>
+         <div class="mb-4">
+            <label class="block text-gray-700 font-semibold mb-1">Upload video</label>
+            <input type="file" name="video__url" class="w-full border px-4 py-2 rounded">
         </div>
 
         <div class="mb-4">
-            <label class="block text-gray-700 font-semibold mb-1">Upload File</label>
-            <input type="file" name="file" class="w-full border px-4 py-2 rounded">
+            <label class="block text-gray-700 font-semibold mb-1">Upload pdf File</label>
+            <input type="file" name="pdf_path" class="w-full border px-4 py-2 rounded">
         </div>
 
         <div class="mb-6">
             <label class="block text-gray-700 font-semibold mb-1">Lesson Description</label>
-            <textarea name="description" rows="4" class="w-full border px-4 py-2 rounded focus:outline-none focus:ring"></textarea>
+            <textarea name="content" rows="4" class="w-full border px-4 py-2 rounded focus:outline-none focus:ring"></textarea>
         </div>
 
         <div>

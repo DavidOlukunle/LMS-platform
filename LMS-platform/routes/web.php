@@ -58,17 +58,20 @@ Route::middleware(['auth', 'role:instructor'])->prefix('instructor')->name('inst
     //course routes
     Route::resource('courses', InstructorController::class);
 
+
     //registration as an instructor routes
     Route::get('register', [InstructorController::class, 'viewRegisterPage']);
     Route::post('register', [InstructorController::class, 'storeRegistration']);
 
     //module routes
     Route::get('modules', [InstructorController::class, 'moduleIndex']);
-    Route::get('modules/create', [InstructorController::class, 'moduleCreate']);
+    Route::get('modules/{course:slug}/create', [InstructorController::class, 'moduleCreate']);
+    Route::post('modules/{course:slug}/store', [InstructorController::class, 'moduleStore']);
 
     //lesson routes
-     Route::get('lessons', [InstructorController::class, 'LessonIndex']);
-    Route::get('lessons/create', [InstructorController::class, 'LessonCreate']);
+     Route::get('lessons', [InstructorController::class, 'lessonIndex']);
+    Route::get('lessons/{module}/create', [InstructorController::class, 'lessonCreate']);
+    Route::post('lessons/{module}/store', [InstructorController::class, 'lessonStore']);
 
 });
 
