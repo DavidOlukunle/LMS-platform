@@ -18,6 +18,7 @@ class InstructorController extends Controller
         return view('instructor.dashboard', compact('courses','instructors'));
     }
 
+    // course
     public function create(){
         return view("instructor.courses.create");
     }
@@ -44,6 +45,32 @@ class InstructorController extends Controller
         return redirect('instructor/dashboard')->with("status", "course created successfully");
 
     }
+
+    //modules
+
+    public function moduleIndex(){
+        $instructors = Instructor::get();
+        return view('instructor.modules.index', compact('instructors'));
+    }
+
+    public function moduleCreate(){
+         $instructors = Instructor::get();
+        return view('instructor.modules.create', compact('instructors'));
+    }
+
+
+
+    //lessons
+    public function lessonIndex(){
+        $instructors = Instructor::get();
+        return view('instructor.lessons.index', compact('instructors'));
+    }
+
+    public function lessonCreate(){
+         $instructors = Instructor::get();
+        return view('instructor.lessons.create', compact('instructors'));
+    }
+   
 
     // submission of credentials
     public function viewRegisterPage(){

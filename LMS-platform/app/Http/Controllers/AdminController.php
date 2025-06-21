@@ -28,7 +28,8 @@ class AdminController extends Controller
 
     public function viewInstructor($instructorId){
         $instructor = User::with(['instructor'])->findorfail($instructorId);
-        return view('admin.instructor.view-instructor', compact('instructor'));
+        $instructorDetails = Instructor::get();
+        return view('admin.instructor.view-instructor', compact('instructor', 'instructorDetails'));
 
     }
 

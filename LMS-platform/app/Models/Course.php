@@ -35,4 +35,9 @@ class Course extends Model
         return 'slug';
     }
 
+    public function modules()
+    {
+        return $this->hasMany(Module::class);
+    }
+
 }

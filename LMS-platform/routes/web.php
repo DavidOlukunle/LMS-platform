@@ -55,9 +55,21 @@ Route::get("users/{userId}/delete", [UserController::class, 'destroy']);
 
 Route::middleware(['auth', 'role:instructor'])->prefix('instructor')->name('instructor.')->group(function(){
     Route::get('dashboard', [InstructorController::class, 'index']);
+    //course routes
     Route::resource('courses', InstructorController::class);
+
+    //registration as an instructor routes
     Route::get('register', [InstructorController::class, 'viewRegisterPage']);
     Route::post('register', [InstructorController::class, 'storeRegistration']);
+
+    //module routes
+    Route::get('modules', [InstructorController::class, 'moduleIndex']);
+    Route::get('modules/create', [InstructorController::class, 'moduleCreate']);
+
+    //lesson routes
+     Route::get('lessons', [InstructorController::class, 'LessonIndex']);
+    Route::get('lessons/create', [InstructorController::class, 'LessonCreate']);
+
 });
 
 
