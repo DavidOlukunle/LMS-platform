@@ -84,11 +84,37 @@
       </div>
     </ul>
 
-    <form method="POST" action="{{ route('logout') }}" class="mt-10">
-        @csrf
-        <button type="submit" class="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600">
-            Log Out
+    <div class="mt-3">
+    @if($instructor->status === 'approved')
+        <button  class="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600"><a href = "{{url('instructor/courses/create')}}">
+            create new course</a>
         </button>
-    </form>
+        @else
+    <div class="relative group inline-block">
+        <button class="bg-gray-400 text-white px-4 py-2 rounded cursor-not-allowed" disabled>
+            Create New Course
+        </button>
+        <div class="absolute top-full mt-1 left-0 bg-black text-white text-xs rounded px-2 py-1 hidden group-hover:block">
+            You have not been approved yet.
+        </div>
+    </div>
+
+    @endif
 </div>
+</div>
+
+
+
+
+<script>
+    let paragraph = document.getElementById('response')
+    let btn = document.getElementById('button')
+
+    btn.addEventListener("click", () => 
+    paragraph.innerHTML = "you are yet to be verified"
+)
+
+    
+
+    </script>
 @endsection

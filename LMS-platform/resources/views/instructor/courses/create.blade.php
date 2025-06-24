@@ -18,6 +18,8 @@
         </div>
     @endif
 
+    @if(auth()->user()->status === 'approved')
+
     <form action="{{ route('instructor.courses.store') }}" method="POST" enctype="multipart/form-data">
         @csrf
 
@@ -64,5 +66,8 @@
             </button>
         </div>
     </form>
+    @else
+    <p> you have no access to this page!!</p>
+    @endif
 </div>
 </x-app-layout>

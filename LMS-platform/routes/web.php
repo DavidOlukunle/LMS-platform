@@ -6,6 +6,7 @@ use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\StudentController;
 use Illuminate\Support\Facades\Route;
 use Spatie\Permission\Contracts\Permission;
 use Spatie\Permission\Contracts\Role;
@@ -16,15 +17,17 @@ Route::get('/', function () {
 
 
 // middleware for student
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'role:student'])->name('dashboard');
+// Route::get('/dashboard', function () {
+//     return view('student.ashboard');
+// })->middleware(['auth', 'role:student'])->name('dashboard');
 
-Route::middleware('auth')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-});
+// Route::middleware('auth')->group(function () {
+//     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+//     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+//     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+// });
+
+
 
 
 //middleware for admin
@@ -50,6 +53,20 @@ Route::get("users/{userId}/delete", [UserController::class, 'destroy']);
 
 
  });
+
+
+//  Route::middleware(['auth', 'role:student'])->prefix('student')->name('student.')->group(function(){
+
+//     Route::get('dashboard', [StudentController::class, 'index']);
+// });
+
+Route::middleware(['auth', 'role:student'])->prefix('student')->name('student.')->group(function() {
+    Route::get('dashboard', [StudentController::class, 'dashboard'])->name('dashboard');
+    Route::get('courses', [StudentController::class, 'courses']);
+    Route::get('courses/{course:slug}/show', [studentController::class, 'showCourse']);
+});
+    
+
 
 //middleware for instructor
 

@@ -21,6 +21,7 @@ class InstructorController extends Controller
 
     // course
     public function create(){
+        
         return view("instructor.courses.create");
     }
 
