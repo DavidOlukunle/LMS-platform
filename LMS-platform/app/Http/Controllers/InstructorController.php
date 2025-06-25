@@ -21,8 +21,8 @@ class InstructorController extends Controller
 
     // course
     public function create(){
-        
-        return view("instructor.courses.create");
+         $instructors = Instructor::where('user_id', Auth::id())->get();
+        return view("instructor.courses.create", compact('instructors'));
     }
 
     public function store(Request $request){
@@ -118,7 +118,8 @@ class InstructorController extends Controller
 
     // submission of credentials
     public function viewRegisterPage(){
-        return view('instructor.register');
+        $instructors = Instructor::get();
+        return view('instructor.register', compact('instructors'));
     }
 
     public function storeRegistration(Request $request){

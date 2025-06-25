@@ -11,8 +11,15 @@
                 <p class="text-sm text-gray-500">Instructor</p>
             </div>
         </div>
-        <a href="{{ url('') }}" class="text-blue-600 hover:underline">Edit Profile</a>
+       @if($instructors->isNotEmpty())
+       <a href="{{ url('') }}" class="text-blue-600 hover:underline">Edit Profile</a>
+          
+          @else
+        <a href="{{ url('instructor/register') }}" class="text-blue-600 hover:underline">complete instructor registration</a>
+        @endif
     </div>
+
+    
 
     <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
       @foreach($instructors as $instructor)
@@ -85,6 +92,7 @@
     </ul>
 
     <div class="mt-3">
+         @foreach($instructors as $instructor)
     @if($instructor->status === 'approved')
         <button  class="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600"><a href = "{{url('instructor/courses/create')}}">
             create new course</a>
@@ -100,6 +108,7 @@
     </div>
 
     @endif
+    @endforeach
 </div>
 </div>
 

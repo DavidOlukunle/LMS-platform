@@ -21,9 +21,9 @@ class AdminController extends Controller
     }
 
     public function instructor(){
-        $instructors = User::role('instructor')->get();
-        $instructorDetails = Instructor::get();
-        return view('admin.instructor.index', compact('instructors', 'instructorDetails'));
+        $instructors = User::role('instructor')->with('instructor')->get();
+        // $instructorDetails = Instructor::get();
+        return view('admin.instructor.index', compact('instructors', ));
     }
 
     public function viewInstructor($instructorId){
@@ -36,8 +36,11 @@ class AdminController extends Controller
     public function updateStatus(Request $request, $instructorId){
         $request->validate(['status'=>'required']);
 
-        $instructor = User::findorfail($instructorId);
-        $instructor->update(['status' => $request->status]);
+        $user = User::with('instructor')->findorfail($instructorId);
+       if($user->instructor){
+        $user->instructor->status = $request->status;
+        $user->instructor->save();
+       }
 
         return redirect()->back()->with('status', 'updated successfully');
     }

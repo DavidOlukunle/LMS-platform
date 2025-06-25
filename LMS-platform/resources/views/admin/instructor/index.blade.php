@@ -20,47 +20,44 @@
           <tr>
             <th class="px-4 py-2 text-left text-sm">Name</th>
             <th class="px-4 py-2 text-left text-sm">Email</th>
+            <th class="px-4 py-2 text-left text-sm">status</th>
             <th class="px-4 py-2 text-left text-sm">Department</th>
-            <th class="px-4 py-2 text-left text-sm">Status</th>
             <th class="px-4 py-2 text-left text-sm">Actions</th>
           </tr>
         </thead>
         <tbody class="text-gray-700">
           
-          @foreach ($instructors as $instructor)
-            
-          <tr class="border-t">
-             <td class="px-4 py-2 text-blue-600 font-bold"> <a href = "{{ url('/admin/instructor/'.$instructor->id. '/view-instructor') }}"> {{ $instructor->name }} </a> </td>
-            <td class="px-4 py-2">{{ $instructor->email }}</td>
-             @endforeach
+         @foreach($instructors as $instructor)
+    <tr>
+        <td>{{ $instructor->name }}</td>
+        <td>{{ $instructor->email }}</td>
+        <td>
+            {{ $instructor->instructor->status ?? 'Not completed' }}
+        </td>
+        <td>
+            {{ $instructor->instructor->department ?? 'N/A' }}
+        </td>
+        <td>
+            @if(optional($instructor->instructor)->status !== 'approved')
+                <form action="{{url('admin/instructor/'.$instructor->id. '/updateStatus')}}" method="POST">
+                    @csrf
+                    @method('PATCH')
+                     <select name="status" class="border px-2 py-1 rounded">
+        <option value="pending" {{ $instructor->status == 'pending' ? 'selected' : '' }}>Pending</option>
+        <option value="approved" {{ $instructor->status == 'approved' ? 'selected' : '' }}>Approved</option>
+        <option value="rejected" {{ $instructor->status == 'rejected' ? 'selected' : '' }}>Rejected</option>
+    </select>
+    <button type="submit" class="bg-blue-500 text-white px-3 py-1 rounded">Update</button>
+                </form>
+            @else
+                <span class="text-green-500 font-semibold">Approved</span>
+            @endif
+        </td>
+    </tr>
+@endforeach
 
-             @foreach($instructorDetails as $details)
-            <td class="px-4 py-2">{{ $details->department ?? 'N/A' }}</td>
-            <td class="px-4 py-2">
-              @if ($details->status === 'approved')
-                <span class="text-green-600 font-semibold">Approved</span>
-              @elseif ($details->status === 'pending')
-                <span class="text-yellow-600 font-semibold">Pending</span>
-              @else
-                <span class="text-red-600 font-semibold">Suspended</span>
-              @endif
-            </td>
 
-            @endforeach
-
-<td class="px-4 py-2">
-    <form action="{{ url('admin/instructor/'. $instructor->id .'/updateStatus') }}" method="POST">
-        @csrf
-        @method('PATCH')
-        <select name="status" onchange="this.form.submit()"
-            class="border border-gray-300 rounded px-3 py-1 text-sm text-gray-700 focus:outline-none focus:ring focus:border-blue-500">
-            <option value="accepted" {{ $instructor->status === 'accepted' ? 'selected' : '' }}>Accepted</option>
-            <option value="suspended" {{ $instructor->status === 'suspended' ? 'selected' : '' }}>Suspended</option>
-        </select>
-    </form>
-</td>
-
-          </tr>
+          
          
           
         </tbody>

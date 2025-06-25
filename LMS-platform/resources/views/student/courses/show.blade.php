@@ -21,13 +21,13 @@
                                         <span class="text-xs text-gray-500 uppercase">{{ $lesson->type }}</span>
                                     </div>
 
-                                    @if($lesson->type === 'video')
+                                    @if($lesson->video__url || $lesson->path)
                                         <video controls class="w-full mt-2 rounded-md shadow">
-                                            <source src="{{ asset('storage/' . $lesson->file_path) }}" type="video/mp4">
+                                            <source src="{{ asset('storage/' . $lesson->video__url) }}" type="video/mp4">
                                             Your browser does not support the video tag.
                                         </video>
-                                    @elseif($lesson->type === 'pdf')
-                                        <a href="{{ asset('storage/' . $lesson->file_path) }}" target="_blank"
+                                    
+                                        <a href="{{ asset('storage/' . $lesson->pdf_path) }}" target="_blank"
                                            class="inline-block mt-2 text-blue-600 hover:underline">
                                            View PDF
                                         </a>

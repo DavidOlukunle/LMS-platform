@@ -15,7 +15,11 @@
         <h1 class="text-2xl font-bold text-gray-800">Instructor Dashboard</h1>
       </div>
       <ul class="flex items-center space-x-6 text-sm font-medium">
+        
+        
         @foreach ($instructors as $instructor)
+       
+        
           @if($instructor->status === 'approved')
             <li>
               <span class="inline-block bg-green-100 text-green-700 px-3 py-1 rounded-full text-xs">
@@ -32,7 +36,10 @@
                 Awaiting Approval
               </span>
             </li>
+            
+          
           @endif
+        
         @endforeach
 
         <li>

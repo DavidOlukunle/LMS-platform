@@ -1,9 +1,6 @@
-<x-app-layout>
-    <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Dashboard') }}
-        </h2>
-    </x-slot>
+@extends('instructor.layout')
+
+@section('content')
 
 <div class="max-w-4xl mx-auto mt-10 p-6 bg-white rounded shadow">
     <h2 class="text-2xl font-bold mb-6">Create New Course</h2>
@@ -18,7 +15,7 @@
         </div>
     @endif
 
-    @if(auth()->user()->status === 'approved')
+    @if(auth()->user()->instructor->status === 'approved')
 
     <form action="{{ route('instructor.courses.store') }}" method="POST" enctype="multipart/form-data">
         @csrf
@@ -70,4 +67,4 @@
     <p> you have no access to this page!!</p>
     @endif
 </div>
-</x-app-layout>
+@endsection

@@ -36,7 +36,7 @@ Route::get('/', function () {
 Route::get('dashboard', [AdminController::class, 'index']); 
 Route::get("instructors", [AdminController::class, 'instructor']);  
 Route::get('instructor/{instructorId}/view-instructor', [AdminController::class, 'viewInstructor']);
-Route::put('instructor/{instructorId}/updateStatus', [AdminController::class, 'updateStatus']);
+Route::patch('instructor/{instructorId}/updateStatus', [AdminController::class, 'updateStatus']);
 
 Route::resource('roles', RoleController::class);
 Route::get('roles/{roleId}/give-permissions', [RoleController::class, 'addPermissionToRole']);
