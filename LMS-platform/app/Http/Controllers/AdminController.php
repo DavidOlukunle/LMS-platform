@@ -44,4 +44,29 @@ class AdminController extends Controller
 
         return redirect()->back()->with('status', 'updated successfully');
     }
+
+    public function viewCourses(){
+        $courses = Course::get();
+        return view('admin.instructor.courses', compact('courses'));
+    }
+
+    public function publishCourse($courseId){
+        
+        $course = Course::findorfail($courseId);
+        $course->status = "published";
+        $course->save();
+
+        return redirect()->back()->with('success', 'course published successfully');
+
+    }
+
+     public function unpublishCourse($courseId){
+        
+        $course = Course::findorfail($courseId);
+        $course->status = "draft";
+        $course->save();
+
+        return redirect()->back()->with('success', 'course unpublished successfully');
+
+    }
 }

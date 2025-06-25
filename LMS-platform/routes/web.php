@@ -35,8 +35,11 @@ Route::get('/', function () {
 
 Route::get('dashboard', [AdminController::class, 'index']); 
 Route::get("instructors", [AdminController::class, 'instructor']);  
+Route::get('instructor/courses', [AdminController::class, 'viewCourses']);
 Route::get('instructor/{instructorId}/view-instructor', [AdminController::class, 'viewInstructor']);
 Route::patch('instructor/{instructorId}/updateStatus', [AdminController::class, 'updateStatus']);
+Route::patch('instructor/{courseId}/publishCourse', [AdminController::class, 'publishCourse']);
+Route::patch('instructor/{courseId}/unpublishCourse', [AdminController::class, 'unpublishCourse']);
 
 Route::resource('roles', RoleController::class);
 Route::get('roles/{roleId}/give-permissions', [RoleController::class, 'addPermissionToRole']);
@@ -55,15 +58,13 @@ Route::get("users/{userId}/delete", [UserController::class, 'destroy']);
  });
 
 
-//  Route::middleware(['auth', 'role:student'])->prefix('student')->name('student.')->group(function(){
-
-//     Route::get('dashboard', [StudentController::class, 'index']);
-// });
+ //route for students
 
 Route::middleware(['auth', 'role:student'])->prefix('student')->name('student.')->group(function() {
     Route::get('dashboard', [StudentController::class, 'dashboard'])->name('dashboard');
-    Route::get('courses', [StudentController::class, 'courses']);
+    Route::get('courses', [StudentController::class, 'myCourses']);
     Route::get('courses/{course:slug}/show', [studentController::class, 'showCourse']);
+    Route::post('courses/{course}/enroll', [StudentController::class, 'enroll']);
 });
     
 

@@ -8,7 +8,7 @@
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-6">
             <div class="bg-blue-100 p-4 rounded shadow text-center"><a href ="{{{url('student/courses')}}}">
                 <h3 class="text-lg font-semibold text-blue-800"> Enrolled Courses</h3>
-                <p class="text-2xl mt-2 font-bold">3</p></a>
+                <p class="text-2xl mt-2 font-bold">{{count($enrolledCourseIds)}}</p></a>
             </div>
             <div class="bg-green-100 p-4 rounded shadow text-center">
                 <h3 class="text-lg font-semibold text-green-800">Completed Modules</h3>
@@ -29,18 +29,27 @@
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                 @foreach($courses as $course)
                     <div class="bg-white rounded shadow p-4 hover:shadow-lg transition">
-                        <img src="{{ asset('storage/' . $course->thumbnail) }}" alt="Course Image" class="w-full h-32 object-cover rounded mb-4">
+                        <img src="{{ asset('storage/' . $course->image) }}" alt="Course Image" class="w-full h-32 object-cover rounded mb-4">
                         <h3 class="text-lg font-semibold text-gray-800">{{ $course->title }}</h3>
                         <p class="text-sm text-gray-600 mb-2">By {{ $course->instructor->name ?? 'Instructor' }}</p>
 
+                         <div class="flex justify-between items-center space-x-2">
                         <a href="{{ url('student/courses/' .$course->slug.'/show') }}"
                            class="mt-2 inline-block text-sm text-white bg-blue-600 px-3 py-1 rounded hover:bg-blue-700">
-                            View Course
-                        </a> <span>
-                            <a href="{{ url('student/courses/' .$course->slug.'/show') }}"
-                           class="mt-2 inline-block text-sm text-white bg-blue-600 px-3 py-1 rounded hover:bg-blue-700">
-                            Enroll Course
-                        </a></span>
+                            View details
+                        </a> 
+                    
+                           @if(in_array($course->id, $enrolledCourseIds))
+                            <span class="bg-green-100 text-green-800 px-2 py-1 rounded">Enrolled</span>
+            @else
+                            <form action = "{{ url('student/courses/'.$course->id.'/enroll') }}" Method = "POST">
+                            @csrf
+    <button type="submit" class="bg-blue-600 text-white px-3 py-1 rounded hover:bg-blue-700">
+        Enroll Now
+    </button>
+</form>
+@endif
+                         </div>
                     </div>
                 @endforeach
             </div>

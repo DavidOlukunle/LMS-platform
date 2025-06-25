@@ -40,4 +40,8 @@ class Course extends Model
         return $this->hasMany(Module::class);
     }
 
+    public function enrolledStudents(){
+        return $this->belongsToMany(User::class)->withTimeStamps();
+    }
+
 }

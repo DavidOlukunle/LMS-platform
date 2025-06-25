@@ -21,6 +21,7 @@
                                         <span class="text-xs text-gray-500 uppercase">{{ $lesson->type }}</span>
                                     </div>
 
+                                   @if(in_array($course->id, $enrolledCourseIds))
                                     @if($lesson->video__url || $lesson->path)
                                         <video controls class="w-full mt-2 rounded-md shadow">
                                             <source src="{{ asset('storage/' . $lesson->video__url) }}" type="video/mp4">
@@ -31,6 +32,9 @@
                                            class="inline-block mt-2 text-blue-600 hover:underline">
                                            View PDF
                                         </a>
+                                    @endif
+                                    @else
+                                    <p class='text-blue-600'><a href="{{url('student/dashboard')}}"> enroll to have full acess to course materials</a></p>
                                     @endif
                                 </li>
                             @endforeach

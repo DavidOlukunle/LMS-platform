@@ -10,7 +10,7 @@
             <a href="{{ url('admin/roles') }}" class="block px-4 py-2 rounded hover:bg-blue-100">Roles</a>
             <a href="{{ url('admin/permissions') }}" class="block px-4 py-2 rounded hover:bg-blue-100">Permissions</a>
             <a href="{{ url('admin/users') }}" class="block px-4 py-2 rounded hover:bg-blue-100">Users</a>
-            <a href="{{ url('admin/courses') }}" class="block px-4 py-2 rounded hover:bg-blue-100">Courses</a>
+            <a href="{{ url('admin/instructor/courses') }}" class="block px-4 py-2 rounded hover:bg-blue-100">Courses</a>
             <a href="{{ url('admin/instructors') }}" class="block px-4 py-2 rounded hover:bg-blue-100">Instructors</a>
             <a href="{{ url('admin/reports') }}" class="block px-4 py-2 rounded hover:bg-blue-100">Reports & Analytics</a>
             <form action="{{ route('logout') }}" method="POST" class="mt-6">
